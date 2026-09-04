@@ -1,0 +1,20 @@
+{
+  "buildCommand": "next build && npm run build:sanity",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "env": {
+    "NEXT_PUBLIC_SANITY_PROJECT_ID": {
+      "description": "Sanity.io project ID"
+    },
+    "NEXT_PUBLIC_SANITY_DATASET": {
+      "description": "Sanity.io dataset name",
+      "value": "production"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/studio/:path*",
+      "destination": "/:path*"
+    }
+  ]
+}
