@@ -43,6 +43,10 @@ const config: Config = {
           secondary: '#5C5A4E',
           tertiary: '#8E8A78',
         },
+        border: {
+          default: '#E8E5D6',
+          strong: '#ABA680',
+        },
       },
       fontFamily: {
         display: ['var(--font-display)', 'system-ui'],
