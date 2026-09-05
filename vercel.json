@@ -1,11 +1,5 @@
 {
-  "buildCommand": "next build && npm run build:sanity",
+  "buildCommand": "next build",
   "installCommand": "npm install",
-  "framework": "nextjs",
-  "rewrites": [
-    {
-      "source": "/studio/:path*",
-      "destination": "/:path*"
-    }
-  ]
+  "framework": "nextjs"
 }
