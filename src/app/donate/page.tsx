@@ -16,7 +16,7 @@ export default function DonatePage() {
   const giveWays = [
     {
       title: 'Workplace Giving',
-      desc: 'Give through your employer's campaign. Every dollar counts.',
+      desc: "Give through your employer's campaign. Every dollar counts.",
     },
     {
       title: 'Legacy Gift',
