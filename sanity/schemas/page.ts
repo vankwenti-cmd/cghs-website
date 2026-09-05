@@ -9,7 +9,21 @@ export default {
       type: 'string',
       validation: (Rule: any) => Rule.required().unique(),
       options: {
-        list: ['home', 'about', 'contact'],
+        list: [
+          'home',
+          'about',
+          'contact',
+          'foster',
+          'volunteer',
+          'donate',
+          'adopt',
+          'leadership',
+          'impact',
+          'events',
+          'stories',
+          'resources',
+          'surrender',
+        ],
       },
     },
     {

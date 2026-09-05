@@ -70,6 +70,15 @@ export default async function RootLayout({
       </head>
       <body>
         <div className="min-h-screen flex flex-col bg-[var(--surface-page)]">
+          {settings?.urgentBannerEnabled && (
+            <div className="bg-cyan-900 text-cyan-50 text-sm py-2.5 px-8 flex justify-center gap-2.5 items-center flex-wrap">
+              <span className="font-bold uppercase text-xs text-cyan-300 tracking-widest">Urgent</span>
+              <span>{settings.urgentBannerText || 'Important announcement'}</span>
+              <a href="/foster" className="text-white underline font-semibold">
+                Foster a dog
+              </a>
+            </div>
+          )}
           <Header settings={settings} />
           <main className="flex-1">
             {children}

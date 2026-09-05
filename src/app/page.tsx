@@ -9,25 +9,17 @@ export default async function Home() {
     getSettings(),
   ])
 
-  const stats = [
-    { value: '1,340', label: 'Animals placed (2025)' },
-    { value: '98.6%', label: 'Live release rate' },
-    { value: '24', label: 'Average days in care' },
-    { value: '9', label: 'States we serve' },
-  ]
+  const stats = settings?.homeStats?.length
+    ? settings.homeStats
+    : [
+        { value: '1,340', label: 'Animals placed (2025)' },
+        { value: '98.6%', label: 'Live release rate' },
+        { value: '9', label: 'States we transport from' },
+        { value: '140', label: 'Active volunteers' },
+      ]
 
   return (
     <div>
-      {settings?.urgentBannerEnabled && (
-        <div className="bg-cyan-900 text-cyan-50 text-sm p-2.5 flex justify-center gap-2.5 items-center flex-wrap">
-          <span className="font-bold uppercase text-xs text-cyan-300">Urgent</span>
-          <span>{settings.urgentBannerText || 'Important announcement'}</span>
-          <a href="/foster" className="text-white underline font-semibold">
-            Take action
-          </a>
-        </div>
-      )}
-
       {/* Hero Section */}
       <section className="bg-ink-950 text-white">
         <div className="max-w-7xl mx-auto px-8 grid grid-cols-2 gap-16 items-center py-20">
@@ -53,7 +45,6 @@ export default async function Home() {
             </div>
           </div>
           <div className="relative h-96 bg-slate-100 rounded-2xl overflow-hidden">
-            {/* Placeholder for hero image */}
             <div className="w-full h-full flex items-center justify-center text-gray-400">
               Hero Image
             </div>
@@ -63,8 +54,8 @@ export default async function Home() {
 
       {/* Stats Section */}
       <section className="bg-ink-900 text-white border-t border-ink-700">
-        <div className="max-width:7xl mx-auto px-8 grid grid-cols-4">
-          {stats.map((stat) => (
+        <div className="max-w-7xl mx-auto px-8 grid grid-cols-4">
+          {stats.map((stat: any) => (
             <div key={stat.label} className="py-8 px-7">
               <div className="font-bold text-4xl text-cyan-300 -tracking-wide">
                 {stat.value}
@@ -84,7 +75,7 @@ export default async function Home() {
                 Looking for a home right now
               </h2>
               <p className="text-text-secondary text-base">
-                Twenty-one animals are with us today. Here are four who have waited longest.
+                Here are the animals who have waited longest for a family.
               </p>
             </div>
             <Link href="/adopt" className="font-bold text-sm">
@@ -92,9 +83,15 @@ export default async function Home() {
             </Link>
           </div>
           <div className="grid grid-cols-4 gap-6">
-            {featured?.map((pet: any) => (
-              <PetCard key={pet._id} pet={pet} />
-            ))}
+            {featured?.length ? (
+              featured.map((pet: any) => <PetCard key={pet._id} pet={pet} />)
+            ) : (
+              <div className="col-span-4 bg-surface-card border border-dashed border-border-strong rounded-lg p-12 text-center">
+                <p className="text-text-secondary">
+                  No animals marked as featured yet — add some in the Studio.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -123,7 +120,7 @@ export default async function Home() {
               <div className="bg-surface-card border border-border-default rounded-lg p-8 shadow-sm hover:shadow-md transition cursor-pointer">
                 <h3 className="font-bold text-2xl mb-2.5">{action.title}</h3>
                 <p className="text-text-secondary text-sm leading-relaxed mb-5">{action.desc}</p>
-                <a className="font-bold text-sm text-link">Browse {action.title.toLowerCase()} →</a>
+                <span className="font-bold text-sm text-cyan-700">Browse {action.title.toLowerCase()} →</span>
               </div>
             </Link>
           ))}
@@ -133,8 +130,8 @@ export default async function Home() {
       {/* Our Work Section */}
       <section className="bg-surface-card border-y border-border-default py-22">
         <div className="max-w-7xl mx-auto px-8 grid grid-cols-2 gap-16 items-center">
-          <div className="h-96 bg-slate-100 rounded-2xl">
-            {/* Placeholder for story image */}
+          <div className="h-96 bg-slate-100 rounded-2xl flex items-center justify-center text-gray-400">
+            Photo — volunteers at the shelter
           </div>
           <div>
             <div className="text-xs tracking-widest uppercase text-cyan-700 font-bold mb-4">
@@ -156,6 +153,21 @@ export default async function Home() {
               Read our story →
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Success stories teaser */}
+      <section className="py-22">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="flex items-end justify-between gap-6 mb-9 flex-wrap">
+            <h2 className="font-bold text-4xl -tracking-wider">They found their people</h2>
+            <Link href="/stories" className="font-bold text-sm">
+              More success stories →
+            </Link>
+          </div>
+          <p className="text-text-secondary text-base max-w-2xl">
+            Read stories from adopters across the gorge on our success stories page.
+          </p>
         </div>
       </section>
 

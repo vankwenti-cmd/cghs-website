@@ -3,9 +3,10 @@ import Link from 'next/link'
 export default function Header({ settings }: { settings: any }) {
   const navItems = [
     { label: 'Adopt', href: '/adopt' },
-    { label: 'Volunteer', href: '/volunteer' },
     { label: 'Foster', href: '/foster' },
+    { label: 'Volunteer', href: '/volunteer' },
     { label: 'About', href: '/about' },
+    { label: 'Leadership', href: '/leadership' },
     { label: 'Events', href: '/events' },
     { label: 'Contact', href: '/contact' },
   ]
@@ -40,7 +41,7 @@ export default function Header({ settings }: { settings: any }) {
             <Link
               key={item.href}
               href={item.href}
-              className="px-3.25 py-2.25 rounded-sm text-sm font-semibold no-underline text-cyan-300 hover:text-cyan-400"
+              className="px-3.25 py-2.25 rounded-sm text-sm font-semibold no-underline text-slate-300 hover:text-cyan-300"
             >
               {item.label}
             </Link>

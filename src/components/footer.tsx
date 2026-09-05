@@ -1,86 +1,94 @@
 import Link from 'next/link'
 
 export default function Footer({ settings }: { settings: any }) {
+  const animals = [
+    { label: 'Adoptable pets', href: '/adopt' },
+    { label: 'Foster program', href: '/foster' },
+    { label: 'Success stories', href: '/stories' },
+    { label: 'Surrender or report', href: '/surrender' },
+  ]
+  const involved = [
+    { label: 'Volunteer', href: '/volunteer' },
+    { label: 'Donate', href: '/donate' },
+    { label: 'Events', href: '/events' },
+    { label: 'Pet care resources', href: '/resources' },
+  ]
+  const about = [
+    { label: 'Our story', href: '/about' },
+    { label: 'Leadership', href: '/leadership' },
+    { label: 'Impact and financials', href: '/impact' },
+    { label: 'Contact', href: '/contact' },
+  ]
+
   return (
-    <footer className="bg-cyan-500 text-ink-900 py-16" style={{ backgroundColor: 'var(--cyan-500)' }}>
+    <footer className="bg-cyan-500 text-[#4A3600] py-16" style={{ backgroundColor: 'var(--cyan-500)' }}>
       <div className="max-w-7xl mx-auto px-8 grid grid-cols-4 gap-12">
         <div>
           <div className="flex items-center gap-3 mb-4">
-            <span
-              className="w-8.5 h-8.5 rounded-md bg-text-primary flex items-center justify-center text-cyan-500 font-black text-sm"
-              style={{ backgroundColor: 'var(--text-primary)' }}
-            >
+            <span className="w-8.5 h-8.5 rounded-md bg-text-primary flex items-center justify-center text-cyan-500 font-black text-sm">
               CG
             </span>
-            <span className="font-black text-sm">Columbia Gorge Humane Society</span>
+            <span className="font-black text-sm text-text-primary">Columbia Gorge Humane Society</span>
           </div>
-          <p className="text-sm leading-relaxed">Rescue, care, and rehome cats and dogs across the United States.</p>
+          <p className="text-sm leading-relaxed mb-4 max-w-xs">
+            Giving hope, life, love&hellip; Rescuing and rehoming cats and dogs across the United
+            States since 1989.
+          </p>
+          <div className="text-sm leading-relaxed">
+            <div>{settings?.address || '1400 River Bend Road, The Dalles, OR 97058'}</div>
+            <div>{settings?.phone || '(541) 000-0100'}</div>
+            <div>
+              <a href={`mailto:${settings?.email || 'hello@cghumane.org'}`} className="font-semibold text-text-primary">
+                {settings?.email || 'hello@cghumane.org'}
+              </a>
+            </div>
+          </div>
         </div>
 
         <div>
-          <h4 className="font-bold mb-4">Organization</h4>
-          <ul className="space-y-2">
-            <li>
-              <Link href="/about" className="text-sm hover:underline">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link href="/leadership" className="text-sm hover:underline">
-                Leadership
-              </Link>
-            </li>
-            <li>
-              <Link href="/impact" className="text-sm hover:underline">
-                Impact Report
-              </Link>
-            </li>
-            <li>
-              <Link href="/resources" className="text-sm hover:underline">
-                Resources
-              </Link>
-            </li>
+          <h4 className="text-xs font-bold uppercase tracking-widest text-text-primary mb-4">Animals</h4>
+          <ul className="space-y-2.5">
+            {animals.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="text-sm text-[#4A3600] hover:underline">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h4 className="font-bold mb-4">Get Involved</h4>
-          <ul className="space-y-2">
-            <li>
-              <Link href="/adopt" className="text-sm hover:underline">
-                Adopt
-              </Link>
-            </li>
-            <li>
-              <Link href="/volunteer" className="text-sm hover:underline">
-                Volunteer
-              </Link>
-            </li>
-            <li>
-              <Link href="/foster" className="text-sm hover:underline">
-                Foster
-              </Link>
-            </li>
-            <li>
-              <Link href="/donate" className="text-sm hover:underline">
-                Donate
-              </Link>
-            </li>
+          <h4 className="text-xs font-bold uppercase tracking-widest text-text-primary mb-4">Get involved</h4>
+          <ul className="space-y-2.5">
+            {involved.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="text-sm text-[#4A3600] hover:underline">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h4 className="font-bold mb-4">Contact</h4>
-          <div className="space-y-2 text-sm">
-            <div className="font-semibold">{settings?.phone || '(541) 000-0117'}</div>
-            <div>{settings?.email || 'info@cghumane.org'}</div>
-            <div className="leading-relaxed">{settings?.address || 'Hood River, OR'}</div>
-          </div>
+          <h4 className="text-xs font-bold uppercase tracking-widest text-text-primary mb-4">About us</h4>
+          <ul className="space-y-2.5">
+            {about.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="text-sm text-[#4A3600] hover:underline">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-8 mt-12 pt-8 border-t border-ink-900/20 text-sm text-center">
-        <p>© {new Date().getFullYear()} Columbia Gorge Humane Society. 501(c)(3) nonprofit.</p>
+      <div className="max-w-7xl mx-auto px-8 mt-8 pt-6 border-t border-[#141414]/20 flex justify-between gap-6 flex-wrap text-xs">
+        <span>
+          501(c)(3) nonprofit &middot; EIN 00-0000000 &middot; &copy; {new Date().getFullYear()} Columbia Gorge Humane Society
+        </span>
       </div>
     </footer>
   )

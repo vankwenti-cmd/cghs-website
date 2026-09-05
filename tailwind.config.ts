@@ -1,5 +1,15 @@
 import type { Config } from 'tailwindcss'
 
+// Generate a dense spacing scale (0 to 200 in 0.25 steps) so every "n" utility
+// (h-19, px-6.5, mb-4.5, etc.) resolves to n * 0.25rem, matching Tailwind's own
+// convention, instead of silently producing no CSS for values outside the
+// small default scale.
+const denseSpacing: Record<string, string> = {}
+for (let i = 0; i <= 800; i++) {
+  const key = i % 4 === 0 ? String(i / 4) : (i / 4).toString()
+  denseSpacing[key] = `${i * 0.25}rem`
+}
+
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -44,8 +54,13 @@ const config: Config = {
           tertiary: '#8E8A78',
         },
         border: {
-          default: '#E8E5D6',
-          strong: '#ABA680',
+          default: '#E6E2D4',
+          strong: '#D3CFBD',
+        },
+        danger: {
+          50: '#FEF2F2',
+          500: '#EF4444',
+          700: '#B91C1C',
         },
       },
       fontFamily: {
@@ -59,6 +74,7 @@ const config: Config = {
         lg: '0.75rem',
         full: '9999px',
       },
+      spacing: denseSpacing,
     },
   },
   plugins: [],

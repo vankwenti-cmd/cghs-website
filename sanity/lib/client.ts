@@ -11,6 +11,10 @@ export async function getPet(id: string) {
   return client.fetch(`*[_type == "pet" && _id == $id][0]`, { id })
 }
 
+export async function getAllPetIds() {
+  return client.fetch(`*[_type == "pet"]{_id}`)
+}
+
 export async function getPets(filters?: { species?: string; age?: string; size?: string; location?: string }) {
   let query = `*[_type == "pet"`
 
@@ -24,15 +28,19 @@ export async function getPets(filters?: { species?: string; age?: string; size?:
 }
 
 export async function getFeaturedPets() {
-  return client.fetch(`*[_type == "pet" && featured == true] | order(name asc)[0...4]`)
+  return client.fetch(`*[_type == "pet" && featured == true] | order(daysInCare desc)[0...4]`)
 }
 
 export async function getLeaders() {
-  return client.fetch(`*[_type == "leader"] | order(name asc)`)
+  return client.fetch(`*[_type == "leader" && isBoard != true] | order(name asc)`)
+}
+
+export async function getBoardMembers() {
+  return client.fetch(`*[_type == "leader" && isBoard == true] | order(name asc)`)
 }
 
 export async function getStories() {
-  return client.fetch(`*[_type == "story"] | order(when desc)[0...6]`)
+  return client.fetch(`*[_type == "story"] | order(when desc)`)
 }
 
 export async function getEvents() {
